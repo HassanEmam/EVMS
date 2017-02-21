@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content ="IE Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    </head>
+  <body>
+    
+    <div class='row'> 
+      <div class="col-md-offset-1 col-md-3">Occult Management: <a href="/">Home</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-3 menu-list">
+        <ul class="side-menu">
+        <li><a href={{ url_for('login_success') }}> <h3>Home</h3></a></li>
+        <li><a href={{ url_for('newproject') }}> <h3>Projects</h3></a></li>
+        <li><a href={{ url_for('view_control_accounts') }}> <h3>Control Accounts</h3></a></li>
+        <li><a href={{ url_for('view_cost_accounts') }}> <h3>Cost Accounts</h3></a></li>
+        <li><a href={{ url_for('login_success') }}> <h3>Change Control</h3></a></li>
+        <li><a href={{ url_for('login_success') }}> <h3>Codes</h3></a></li>
+        <li><a href={{ url_for('login_success') }}> <h3>Schedule</h3></a></li>
+        <li><a href={{ url_for('login_success') }}> <h3>Reporting</h3></a></li>
+        <li><a href={{ url_for('admin') }}> <h3>Admin Control Panel</h3></a></li>
+        </ul>
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+    <hr>
+    
+  </body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ url_for('static', filename='javascript/jquery-1.11.2.min.js') }}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+</html>

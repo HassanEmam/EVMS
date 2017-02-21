@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Occult - Projects
+{% endblock %}
+
+{% block content %}
+
+    <div class ="col-md-5">
+        <h1>Cost Accounts List</h1>
+        <table class='table table-hover table-responsive'>
+        <tr>
+        <th>Code</th>
+        <th>Account Name</th>
+        </tr>
+        {% for account in accounts %}
+        <tr>
+        <td>{{ account.code }}</td>
+        <td><a href ="/viewcostaccount/{{account.id }}">{{ account.name }}</a></td>
+        
+        </tr>
+        
+        {% endfor %}
+        </table>
+           
+    </div>
+
+{% endblock %}

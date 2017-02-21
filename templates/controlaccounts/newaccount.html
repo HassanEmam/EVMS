@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ConOccult - Control Accounts
+{% endblock %}
+
+{% block content %}
+
+    <div class ="col-md-4">
+        <h1>Control Account</h1>
+        {% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+        {% from '_formhelpers.html' import render_field %}
+        {% if action=='new' %}<form method="POST" action ={{ url_for('newcontrolaccount') }} role ="form">
+        {% else %}<form method="POST" action="{{ url_for('editcontrolaccount', account_id= account.id)  }}" enctype="multipart/form-data" role="form">
+        {% endif %}
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+         code, name, accounttype, budget, PMB_start, PMB_finish, PMU_start, PMU_finish, parent_id, curve, project
+        {{ render_field(form.code, class="form-control") }}
+        {{ render_field(form.name, class="form-control") }}
+        {{ render_field(form.curve, class="form-control") }}
+        {{ render_field(form.accounttype, class="form-control") }}
+        {{ render_field(form.project, class="form-control") }}
+        {{ render_field(form.budget, class="form-control") }}
+        {{ render_field(form.PMB_start, class="form-control") }}
+        {{ render_field(form.PMB_finish, class="form-control") }}
+        {{ render_field(form.PMU_start, class="form-control") }}
+        {{ render_field(form.PMU_finish, class="form-control") }}
+        {{ render_field(form.parent, class="form-control") }}
+        
+
+
+        <button type ="submit" class="btn btn-default">Save</button>
+        </form>
+    
+    </div>
+
+{% endblock %}

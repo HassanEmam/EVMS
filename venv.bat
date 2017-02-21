@@ -1,0 +1,1 @@
+G:\EVMS\flask\Scripts\activate.bat

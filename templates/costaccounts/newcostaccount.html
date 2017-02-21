@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ConOccult - Cost Accounts
+{% endblock %}
+
+{% block content %}
+
+    <div class ="col-md-4">
+        <h1>Cost Account</h1>
+        {% from '_formhelpers.html' import render_field %}
+        {% if action=='new' %}<form method="POST" action ={{ url_for('newcostaccount') }} role ="form">
+        {% else %}<form method="POST" action="{{ url_for('editcostaccount', account_id= account.id)  }}" enctype="multipart/form-data" role="form">
+        {% endif %}
+        {{ form.hidden_tag() }}
+        
+        {{ render_field(form.code, class="form-control") }}
+        {{ render_field(form.name, class="form-control") }}
+        {{ render_field(form.controlaccount, class="form-control") }}
+        {{ render_field(form.parent, class="form-control") }}
+        
+
+
+        <button type ="submit" class="btn btn-default">Save</button>
+        </form>
+    
+    </div>
+
+{% endblock %}

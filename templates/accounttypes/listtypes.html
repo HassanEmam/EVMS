@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Occult - Projects
+{% endblock %}
+
+{% block content %}
+    <div class ="col-md-4">
+        <h1>Types Information</h1>
+        <table class='table table-hover table-responsive'>
+        <tr>
+            <th>Type Code</th>
+            <th>Type Name</th>
+            <th>Earns Value</th>
+        </tr>
+        {% for atype in types_list %}
+        <tr>
+            <td>{{ atype.code }}</td>
+            <td>{{ atype.name }}</td>
+            <td>{{ atype.earns }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+           
+    </div>
+{% endblock %}
