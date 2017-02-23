@@ -35,10 +35,11 @@ ConOccult - Spread Profile
         {{ render_field(form.period18, class="form-control") }}
         {{ render_field(form.period19, class="form-control") }}
         {{ render_field(form.period20, class="form-control") }}
+        <div id='message' class='message' style="color:red"></div>
+        <button type ="submit" id='btn' class="btn btn-default">Save</button>
         
-        <button type ="submit" class="btn btn-default">Save</button>
         </form>
     
     </div>
-
+<script src="{{ url_for('static', filename='js/spread.js') }}"></script>
 {% endblock %}

@@ -76,6 +76,5 @@ def edit_project(project_id):
         db.session.add(project)
         db.session.flush()
         db.session.commit()
-        print(project.code)
         return redirect(url_for('project_details', id= project.id))
     return render_template('project/setup.html', form = form, project=project, action='edit')

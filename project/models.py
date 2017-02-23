@@ -8,7 +8,7 @@ from controlaccounts.models import ControlAccount
 class Project(db.Model):
 	__tablename__ ="projects"
 	id = db.Column(db.Integer, primary_key=True)
-	code = db.Column(db.String(80))
+	code = db.Column(db.String(80), unique=True)
 	name = db.Column(db.String(80))
 	owner = db.Column(db.Integer, db.ForeignKey('users.id'))
 	description = db.Column(db.Text)

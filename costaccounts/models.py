@@ -7,7 +7,7 @@ from EVMS import db
 class CostAccount(db.Model):
 	__tablename__ ="cost_accounts"
 	id = db.Column(db.Integer, primary_key=True)
-	code = db.Column(db.String(80))
+	code = db.Column(db.String(80), unique=True)
 	name = db.Column(db.String(80))
 
 	controlaccount_id = db.Column('ControlAccount', db.Integer, db.ForeignKey('controlaccounts.id'))

@@ -36,7 +36,7 @@ def newspread():
         db.session.add(spread_data)
         db.session.flush()
         db.session.commit()
-        return redirect(url_for('spread_added'))
+        return redirect(url_for('view_spread_profiles'))
     return render_template('spreadprofile/newspreadprofile.html', form=form, action='new')
     
 @app.route('/spread_added')
