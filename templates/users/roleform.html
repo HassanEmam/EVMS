@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} ConOccult - Roles {% endblock %}
+{% block content %}
+
+    <div class="col-md-4">
+        <h3> Roles Definition Form</h3>
+        {% from "_formhelpers.html" import render_field %}
+        {% if action=='new' %}<form method="POST" action ={{ url_for('add_role') }} role ="form">
+        {% else %}<form method="POST" action="{{ url_for('edit_role', id = role.id)  }}" enctype="multipart/form-data" role="form">
+        {% endif %}
+        {{ form.hidden_tag() }}
+        <h4> Authorization Details</h4>
+        {{ render_field(form.description, class="form-control") }}
+        {{ render_field(form.is_read, class='form-control') }}
+        {{ render_field(form.is_create, class='form-control') }}
+        {{ render_field(form.is_edit, class='form-control') }}
+        {{ render_field(form.is_delete, class='form-control') }}
+
+        <button type="submit" class="btn btn-default">Save</button>
+        </form>
+    </div>
+
+{% endblock %}

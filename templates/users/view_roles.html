@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ConOccult - Roles
+{% endblock %}
+
+{% block content %}
+
+    <div class ="col-md-5">
+        <h1>Roles List</h1>
+        <table class='table table-hover table-responsive'>
+        <tr>
+            <th>Role Name</th>
+            <th>Create</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View</th>
+            <th>Actions</th>
+        </tr>
+        {% for role in roles %}
+        <tr>
+        <td><a href ="{{ url_for('edit_role' , id= role.id) }}">{{ role.description }}</a></th>
+        </td>
+        <td>{{ role.is_create }}</td>
+        <td>{{ role.is_edit }}</td>
+        <td>{{ role.is_delete }}</td>
+        <td>{{ role.is_read }}</td>
+        <td><a href="{{ url_for('delete_role', id = role.id) }} "><img src="{{ url_for('static', filename='img/delete.png') }}" style="width:20px;height:20px;" alt="Delete"/> </a>
+        <a href="{{ url_for('edit_role', id = role.id) }} "><img src="{{ url_for('static', filename='img/edit.png') }}" style="width:20px;height:20px;" alt="Edit"/> </a>
+        </td>
+        {% endfor %}
+        </table>
+           
+    </div>
+
+{% endblock %}
