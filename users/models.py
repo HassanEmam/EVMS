@@ -10,7 +10,6 @@ class User(db.Model):
     password = db.Column(db.String(80))
     is_admin = db.Column(db.Boolean)
     
-    
     def __init__(self, firstname, lastname, email, username, password, is_admin=False):
         self.firstname = firstname
         self.email = email
@@ -21,3 +20,24 @@ class User(db.Model):
 
     def __repr__(self):
         return self.username
+
+       
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key =True)
+    description = db.Column(db.String(80))
+    is_read = db.Column(db.Boolean)
+    is_create = db.Column(db.Boolean)
+    is_edit = db.Column(db.Boolean)
+    is_delete = db.Column(db.Boolean)
+    is_active = db.Column(db.Boolean)
+    
+    def __init__(self, description, is_read, is_create, is_edit, is_delete, is_active=True):
+        self.description = description
+        self.is_create = is_create
+        self.is_delete = is_delete
+        self.is_edit = is_edit
+        self.is_read = is_read
+        self.is_active = is_active
+        
+    def _repr__(self):
+        return self.description

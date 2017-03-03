@@ -14,9 +14,11 @@ class Project(db.Model):
 	description = db.Column(db.Text)
 	start = db.Column(db.DateTime)
 	finish = db.Column(db.DateTime)
+	cycle_id = db.Column(db.Integer, db.ForeignKey('reportingcycles.id'))
+	cycle= db.relationship('ReportingCycle', backref='project')
 	status = db.Column(db.Boolean)
 
-	def __init__(self, code, name, description, owner, start, finish, status):
+	def __init__(self, code, name, description, owner, start, finish, cycle, status):
 		self.code = code
 		self.name = name
 		self.owner = owner
@@ -24,6 +26,7 @@ class Project(db.Model):
 		self.start = start
 		self.finish = finish
 		self.status = status
+		self.cycle_id= cycle.id
 		
 	def __repr__(self):
 		return self.name

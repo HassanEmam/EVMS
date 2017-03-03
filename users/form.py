@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import validators, StringField, PasswordField
+from wtforms import validators, StringField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
 
 class RegisterForm(Form):
@@ -21,4 +21,10 @@ class LoginForm(Form):
             validators.Required(),
             validators.Length(min=4, max=80)
         ])
-    
+
+class RoleForm(Form):
+    description = StringField('Role Name', [validators.Required()])
+    is_read = BooleanField('Read')
+    is_create = BooleanField('Create')
+    is_edit = BooleanField('Edit')
+    is_delete = BooleanField('Delete')

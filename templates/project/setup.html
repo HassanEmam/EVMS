@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Occult - New Project
+ConOccult - New Project
 {% endblock %}
 
 {% block content %}
@@ -18,6 +18,7 @@ Occult - New Project
         {{ render_field(form.start, class="form-control") }}
         {{ render_field(form.finish, class="form-control") }}
         {{ render_field(form.description, class="form-control") }}
+        {{ render_field(form.cycle, class="form-control") }}
         {{ render_field(form.status, class="form-control") }}
 
         <button type ="submit" class="btn btn-default">Save</button>

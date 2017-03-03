@@ -16,4 +16,6 @@ from accounttypes import views
 from spreadprofile import views
 from controlaccounts import views
 from costaccounts import views
+from organisations import views
+from calendars import views
 

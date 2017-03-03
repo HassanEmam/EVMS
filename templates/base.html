@@ -8,25 +8,58 @@
     <title>{% block title %}{% endblock %}</title>
     <!-- Bootstrap -->
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <style>
+      body {
+          margin: 0;
+      }
+      
+      ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          width: 15%;
+          background-color: #abcdef;
+          position: fixed;
+          height: 100%;
+          overflow: auto;
+      }
+      
+      li a {
+          display: block;
+          color: #000;
+          padding: 8px 16px;
+          text-decoration: none;
+      }
+      
+      li .active {
+          background-color: #4CAF50;
+          color: white;
+      }
+      
+      li a:hover:not(.active) {
+          background-color: #555;
+          color: white;
+      }
+      </style>
     </head>
   <body>
     
     <div class='row'> 
-      <div class="col-md-offset-1 col-md-3">Occult Management: <a href="/">Home</a>
+      <div class="col-md-3">ConOccult Management: <a href="/">Home</a>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-offset-1 col-md-3 menu-list">
+      <div class="col-md-3 menu-list">
         <ul class="side-menu">
-        <li><a href={{ url_for('login_success') }}> <h3>Home</h3></a></li>
-        <li><a href={{ url_for('newproject') }}> <h3>Projects</h3></a></li>
-        <li><a href={{ url_for('view_control_accounts') }}> <h3>Control Accounts</h3></a></li>
-        <li><a href={{ url_for('view_cost_accounts') }}> <h3>Cost Accounts</h3></a></li>
-        <li><a href={{ url_for('login_success') }}> <h3>Change Control</h3></a></li>
-        <li><a href={{ url_for('login_success') }}> <h3>Codes</h3></a></li>
-        <li><a href={{ url_for('login_success') }}> <h3>Schedule</h3></a></li>
-        <li><a href={{ url_for('login_success') }}> <h3>Reporting</h3></a></li>
-        <li><a href={{ url_for('admin') }}> <h3>Admin Control Panel</h3></a></li>
+        <li><a href={{ url_for('login_success') }}> Home</a></li>
+        <li><a href={{ url_for('view_projects') }}> Projects</a></li>
+        <li><a href={{ url_for('view_control_accounts') }}> Control Accounts</a></li>
+        <li><a href={{ url_for('view_cost_accounts') }}> Cost Accounts</a></li>
+        <li><a href={{ url_for('login_success') }}> Change Control</a></li>
+        <li><a href={{ url_for('login_success') }}> Codes</a></li>
+        <li><a href={{ url_for('login_success') }}> Schedule</a></li>
+        <li><a href={{ url_for('login_success') }}> Reporting</a></li>
+        <li><a href={{ url_for('admin') }}> Admin Control Panel</a></li>
         </ul>
       </div>
       {% block content %}{% endblock %}

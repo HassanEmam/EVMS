@@ -18,13 +18,14 @@ def newproject():
                             owner= user.id,
                             description= form.description.data, 
                             start= form.start.data, 
-                            finish= form.finish.data, 
+                            finish= form.finish.data,
+                            cycle= form.cycle.data,
                             status= form.status.data)
         db.session.add(project)
         db.session.flush()
         print(project.name + 'Project Name')
         db.session.commit()
-        return redirect(url_for('proj_added'))
+        return redirect(url_for('view_projects'))
     return render_template('project/setup.html', form=form, action='new')
     
 
@@ -72,9 +73,10 @@ def edit_project(project_id):
         project.status = form.status.data
         project.name = form.name.data
         project.description = form.description.data
+        project.cycle= form.cycle.data
         
         db.session.add(project)
         db.session.flush()
         db.session.commit()
-        return redirect(url_for('project_details', id= project.id))
+        return redirect(url_for('view_projects'))
     return render_template('project/setup.html', form = form, project=project, action='edit')

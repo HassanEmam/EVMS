@@ -1,12 +1,14 @@
 from EVMS import app, db
 from flask import render_template, redirect, session, request, url_for
-from users.form import RegisterForm, LoginForm
-from users.models import User
-from users.decorators import login_required
+from users.form import RegisterForm, LoginForm, RoleForm
+from users.models import User, Role
+from users.decorators import login_required, admin_required
 from project.models import Project
 import bcrypt
 
-
+'''
+This section handles user registeration and login
+'''
 @app.route('/login', methods=('GET', 'POST'))
 def login():
     form = LoginForm()
@@ -47,7 +49,8 @@ def register():
                     form.lastname.data, 
                     form.email.data, 
                     form.username.data, 
-                    hashed_password)
+                    hashed_password,
+                    True)
         
         db.session.add(user)
         db.session.commit()
@@ -60,12 +63,68 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/success')
-def success():
-    return "User registered!"
+
 @app.route('/')
 @app.route('/login_success')
 @login_required
 def login_success():
     projects = Project.query.all()
     return render_template('/project/projectselection.html', projects= projects)
+    
+
+'''
+This section controls the routes for Role
+it has functions to create, edit, delete and view Roles
+'''
+
+
+@app.route('/addrole', methods=('GET', 'POST'))
+def add_role():
+    form = RoleForm()
+    if form.validate_on_submit():
+          
+        role= Role(form.description.data,
+                    form.is_read.data, 
+                    form.is_create.data, 
+                    form.is_edit.data, 
+                    form.is_delete.data)
+        
+        db.session.add(role)
+        db.session.commit()
+        return redirect(url_for('view_roles'))
+    return render_template('users/roleform.html', form=form, action='new')
+    
+@app.route('/viewroles')
+def view_roles():
+    roles = Role.query.filter_by(is_active =True).all()
+    return render_template('users/view_roles.html', roles=roles)
+
+    
+@app.route('/editrole/<id>', methods=('GET', 'POST'))
+@admin_required
+def edit_role(id):
+    role = Role.query.filter_by(id= id).first()
+    form = RoleForm(obj= role)
+    
+    if request.method == "POST" and form.validate():
+        role.description = form.description.data
+        role.is_read = form.is_read.data
+        role.is_create = form.is_create.data
+        role.is_edit = form.is_edit.data
+        role.is_delete = form.is_delete.data
+        
+        db.session.add(role)
+        db.session.flush()
+        db.session.commit()
+        return redirect(url_for('view_roles'))
+    return render_template('users/roleform.html', form = form, role=role, action='edit')
+    
+@app.route('/deleterole/<id>')
+def delete_role(id):
+    role = Role.query.filter_by(id= id).first()
+    role.is_active = False
+        
+    db.session.add(role)
+    db.session.commit()
+    return redirect(url_for('view_roles'))
+    

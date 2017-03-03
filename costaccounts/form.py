@@ -21,5 +21,6 @@ class CostAccountForm(Form):
     name= StringField('Account Name', [validators.Required()])
     controlaccount = QuerySelectField('Control Account', query_factory= get_control_account)
     parent = QuerySelectField('Parent Account', query_factory= get_cost_account, allow_blank=True)
+    
 
     

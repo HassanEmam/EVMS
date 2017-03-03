@@ -43,6 +43,7 @@ def ca_added():
     
 @app.route('/view_control_accounts')
 @login_required
+@project_required
 def view_control_accounts():
     accounts = ControlAccount.query.all()
     return render_template('controlaccounts/view.html', accounts=accounts)
@@ -52,6 +53,7 @@ def view_control_accounts():
 def control_account_details(id):
     account = ControlAccount.query.filter_by(id= id).first()
     return render_template('controlaccounts/details.html', account=account)
+    
     
 @app.route('/editcontrolaccount/<account_id>', methods=['GET', 'POST'])
 def edit_control_account(account_id):
