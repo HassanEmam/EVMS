@@ -10,8 +10,8 @@ class Organisation(db.Model):
 	code = db.Column(db.String(80), unique=True)
 	name = db.Column(db.String(80))
 	description = db.Column(db.Text)
-	admin_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-	admin = db.relationship('User', backref='organisations')
+	#admin_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	#admin = db.relationship('User', backref='organisations')
 	is_active = db.Column(db.Boolean)
 
 	def __init__(self, code, name, description, admin, is_active=True):

@@ -13,5 +13,5 @@ class OrganisationForm(Form):
     code = StringField('Code', [validators.Required()])
     name= StringField('Project Name', [validators.Required()])
     description = TextAreaField ('Description', [validators.Required()])
-    admin = QuerySelectField('Super User', query_factory= get_users, allow_blank=True)
+    #admin = QuerySelectField('Super User', query_factory= get_users, allow_blank=True)
     is_active = BooleanField('Active')

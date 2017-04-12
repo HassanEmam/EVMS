@@ -1,5 +1,5 @@
 from EVMS import app, db
-from flask import render_template, redirect, session, request, url_for
+from flask import render_template, redirect, session, request, url_for, flash
 from users.form import RegisterForm, LoginForm, RoleForm
 from users.models import User, Role
 from users.decorators import login_required, admin_required
@@ -26,6 +26,7 @@ def login():
                 session['username'] = form.username.data
                 session['is_admin'] = author.is_admin
                 session['user_id'] = author.id
+                session['organisation_id'] = author.organisation_id
                 if 'next' in session:
                     next = session.get('next')
                     session.pop('next')
@@ -50,16 +51,20 @@ def register():
                     form.email.data, 
                     form.username.data, 
                     hashed_password,
+                    form.organisation.data,
                     True)
         
         db.session.add(user)
         db.session.commit()
-        return redirect('/success')
+        flash('User Registered')
+        return redirect(url_for('login_success'))
     return render_template('users/register.html', form=form)
 
 @app.route('/logout')
 def logout():
     session.pop('username')
+    session.pop('is_admin')
+    session.pop('user_id')
     return redirect(url_for('login'))
 
 
@@ -86,7 +91,7 @@ def add_role():
         role= Role(form.description.data,
                     form.is_read.data, 
                     form.is_create.data, 
-                    form.is_edit.data, 
+                    form.is_edit.data,
                     form.is_delete.data)
         
         db.session.add(role)

@@ -7,6 +7,15 @@ Occult - Projects
 {% block content %}
     <div class ="col-md-4">
         <h1>Projects List</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
         <form method="POST" action="{{ url_for('project_detail')  }}" enctype="multipart/form-data" role="form">
         <table align='center'>
             <tr><th>Projects</th></tr>

@@ -1,8 +1,14 @@
 from flask_wtf import Form
 from wtforms import validators, StringField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from organisations.models import Organisation
 
 class RegisterForm(Form):
+    
+    def get_organisations():
+        return Organisation.query
+    
     firstname = StringField('First Name', [validators.Required()])
     lastname= StringField('Last Name', [validators.Required()])
     email= EmailField ('Email', [validators.Required()])
@@ -11,6 +17,7 @@ class RegisterForm(Form):
     validators.EqualTo('confirm', message='Passwords must match'),
     validators.Length(min=4, max=80)])
     confirm = PasswordField('Confirm Password')
+    organisation = QuerySelectField('Organisation', query_factory= get_organisations, allow_blank=True)
     
 class LoginForm(Form):
     username = StringField('Username', [

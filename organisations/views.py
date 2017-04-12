@@ -18,7 +18,7 @@ def add_organisation():
         organisation = Organisation (code= form.code.data, 
                             name= form.name.data, 
                             description= form.description.data,
-                            admin = form.admin.data,
+                            #admin = form.admin.data,
                             is_active= form.is_active.data)
         db.session.add(organisation)
         db.session.commit()
@@ -42,7 +42,7 @@ def edit_organisation(id):
         organisation.is_active = form.is_active.data
         organisation.name = form.name.data
         organisation.description = form.description.data
-        organisation.admin = form.admin.data
+        #organisation.admin = form.admin.data
         
         db.session.add(organisation)
         db.session.flush()

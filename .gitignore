@@ -1,1 +1,5 @@
-venv
+/venv/*
+/migrations/*
+/.idea/*
+settings.py
+*.pyc
